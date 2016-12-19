@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="btn_search">Search</string>
+    <string name="msg_withoutMarker">Select a place in the map</string>
+    <string name="txt_empty">No City Founded</string>
+</resources>

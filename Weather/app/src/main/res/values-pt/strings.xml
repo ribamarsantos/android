@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btn_search">Buscar</string>
+    <string name="msg_withoutMarker">Selecione um local no mapa!</string>
+    <string name="txt_empty">Nenhuma cidade encontrada! Tente novamente!</string>
+</resources>
