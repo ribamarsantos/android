@@ -1,7 +1,6 @@
 package network;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -15,7 +14,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import util.Util;
 
 /**
  * Created by ribamarmjs on 17/12/16.
@@ -61,7 +59,7 @@ public class OpenWeatherHTTP {
                 .url(getHttpUrl())
                 .build();
 
-        Response response = null;
+        Response response;
 
         ArrayList<City> cities = new ArrayList<>();
 
@@ -76,18 +74,7 @@ public class OpenWeatherHTTP {
 
             WeatherWrapper dataWrapper = gson.fromJson(json, WeatherWrapper.class);
 
-            cities.clear();
             cities.addAll(dataWrapper.getCities());
-
-            if ( dataWrapper.getCod() == 200){
-                for (City city: dataWrapper.getCities()
-                     ) {
-                    Log.d(Util.TAG, "getCitiesWeather: " + city.getName());
-                    Log.d(Util.TAG, "getCitiesWeather: " + city.getTemperature().getTempMax());
-                    Log.d(Util.TAG, "getCitiesWeather: " + city.getTemperature().getTempMin());
-                    Log.d(Util.TAG, "getCitiesWeather: " + city.getWeather().get(0).getDescription());
-                }
-            }
 
         } catch (IOException e) {
             e.printStackTrace();

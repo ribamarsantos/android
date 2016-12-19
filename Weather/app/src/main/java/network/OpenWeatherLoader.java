@@ -25,7 +25,6 @@ public class OpenWeatherLoader extends AsyncTaskLoader<List<City>> {
 
     @Override
     public List<City> loadInBackground() {
-//        cityWeatherList = OpenWeatherHTTP.getInstance(coords.latitude, coords.longitude).getCitiesWeather();
         cityWeatherList = new OpenWeatherHTTP(coords.latitude, coords.longitude).getCitiesWeather();
         return  cityWeatherList;
     }
@@ -33,7 +32,6 @@ public class OpenWeatherLoader extends AsyncTaskLoader<List<City>> {
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-//        forceLoad();
         if ( cityWeatherList == null){
             forceLoad();
         }else{
