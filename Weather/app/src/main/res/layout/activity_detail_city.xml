@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="city" type="model.City"/>
     </data>
@@ -11,39 +12,34 @@
     android:orientation="vertical"
     android:gravity="center|center"
     tools:context="com.ribamarmjs.weather.activities.DetailCityActivity">
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
+        android:textSize="36dp"
         android:text="@{city.name}" />
-
-
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="40dp"
+        android:textSize="26dp"
         android:textStyle="bold"
         android:text="@{String.valueOf(city.temperature.tempMax)+ '˚'}" />
-
-
+    <ImageView
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:src="@{city.weather.get(0).linkIcon}"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
+        android:textSize="26dp"
         android:textColor="@color/colorTextTemperature"
         android:textStyle="bold"
         android:text="@{String.valueOf(city.temperature.tempMin) + '˚'}" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="40dp"
+        android:textSize="36dp"
         android:text="@{city.weather.get(0).description}" />
-
 </LinearLayout>
 </layout>

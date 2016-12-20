@@ -75,7 +75,6 @@ public class OpenWeatherHTTP {
             WeatherWrapper dataWrapper = gson.fromJson(json, WeatherWrapper.class);
 
             cities.addAll(dataWrapper.getCities());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
