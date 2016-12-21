@@ -7,6 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import dao.CityRepository;
 import model.City;
 
 /**
@@ -16,16 +17,24 @@ import model.City;
 public class OpenWeatherLoader extends AsyncTaskLoader<List<City>> {
 
     private LatLng coords;
+    private boolean isFavoriteList;
     private List<City> cityWeatherList;
 
-    public OpenWeatherLoader(Context context, LatLng coords) {
+    public OpenWeatherLoader(Context context, LatLng coords, boolean isFavoriteList) {
         super(context);
         this.coords  = coords;
+        this.isFavoriteList = isFavoriteList;
     }
 
     @Override
     public List<City> loadInBackground() {
-        cityWeatherList = new OpenWeatherHTTP(coords.latitude, coords.longitude).getCitiesWeather();
+        if (!isFavoriteList){
+            cityWeatherList = new OpenWeatherHTTP().getCitiesNearCoordinate(coords);
+        }else{
+            CityRepository repository = new CityRepository(super.getContext());
+            cityWeatherList =repository.listFavorite();
+        }
+
         return  cityWeatherList;
     }
 

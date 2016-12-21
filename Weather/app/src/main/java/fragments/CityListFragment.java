@@ -31,6 +31,7 @@ public class CityListFragment extends Fragment {
     private LatLng coordinate;
     private List<City> mCities;
     private CityAdapter mAdapter;
+    private boolean isFavoriteList;
 
     // Views
     private RecyclerView mRecyclerView;
@@ -69,12 +70,20 @@ public class CityListFragment extends Fragment {
         mRecyclerView.setAdapter(mAdapter);
 
 
+        setLoader();
 
-        coordinate = getActivity().getIntent().getParcelableExtra(Util.EXTRA_LATLNG);
-
-        initLoader();
 
         return layout;
+
+    }
+
+    private void setLoader() {
+
+        isFavoriteList = getActivity().getIntent().getBooleanExtra(Util.EXTRA_IS_FAVORITE_LIST, false);
+        if(!isFavoriteList) {
+            coordinate = getActivity().getIntent().getParcelableExtra(Util.EXTRA_LATLNG);
+        }
+        initLoader();
 
     }
 
@@ -86,7 +95,7 @@ public class CityListFragment extends Fragment {
     private LoaderManager.LoaderCallbacks<List<City>> loaderCallback  = new LoaderManager.LoaderCallbacks<List<City>>() {
         @Override
         public Loader<List<City>> onCreateLoader(int id, Bundle args) {
-            return new OpenWeatherLoader(getContext(), coordinate);
+            return new OpenWeatherLoader(getContext(), coordinate, isFavoriteList);
         }
 
         @Override

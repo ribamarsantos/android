@@ -1,14 +1,10 @@
 package model;
 
-import android.databinding.BindingAdapter;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by ribamarmjs on 17/12/16.
@@ -23,6 +19,9 @@ public class Weather implements Parcelable {
     private String icon;
     private String linkIcon;
 
+    public Weather(){
+
+    }
     protected Weather(Parcel in) {
         description = in.readString();
         icon = in.readString();
@@ -54,15 +53,14 @@ public class Weather implements Parcelable {
     };
 
     public String getLinkIcon() {
-        return "http://openweathermap.org/img/w/" +
+        return  "http://openweathermap.org/img/w/" +
                 this.icon + ".png";
     }
 
-    public void setLinkIcon(String linkIcon) {
+    public void setLinkIcon(String icon) {
         this.linkIcon = "http://openweathermap.org/img/w/" +
-                this.icon + ".png";
+                icon + ".png";
     }
-
     public String getDescription() {
         return description;
     }
@@ -72,5 +70,11 @@ public class Weather implements Parcelable {
     }
 
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

@@ -2,6 +2,7 @@ package network;
 
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -21,13 +22,11 @@ import okhttp3.Response;
 
 public class OpenWeatherHTTP {
 
-    private final double longitude;
-    private final double latitude;
-
     //URL
     public static final HttpUrl API_BASE_URL = HttpUrl.parse("http://api.openweathermap.org/data/2.5");
     //PATH
     public static final String PATH_FIND     = "find";
+    public static final String PATH_WEATHER  = "weather";
 
     //PARAMS
     public static final String PARAM_LATITUDE  = "lat";
@@ -43,11 +42,8 @@ public class OpenWeatherHTTP {
     private static final String APPID = "68988c96250c1d2068f922c26a917810";
     private static final String SIZE_LIST = "15";
 
-    protected OpenWeatherHTTP(double latitude, double longitude){
-        this.latitude  = latitude;
-        this.longitude = longitude;
-    }
-    public  ArrayList<City> getCitiesWeather(){
+
+    public  ArrayList<City> getCitiesNearCoordinate(LatLng coordinate){
 
         final OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
@@ -56,7 +52,7 @@ public class OpenWeatherHTTP {
                 .build();
 
         Request request = new Request.Builder()
-                .url(getHttpUrl())
+                .url(getUrlNearCoordinate(coordinate))
                 .build();
 
         Response response;
@@ -85,15 +81,16 @@ public class OpenWeatherHTTP {
 
 
     @NonNull
-    private HttpUrl getHttpUrl (){
+    private HttpUrl getUrlNearCoordinate (LatLng coordinate){
         return API_BASE_URL.newBuilder()
                 .addPathSegment(PATH_FIND)
-                .addQueryParameter(PARAM_LATITUDE, String.valueOf(latitude))
-                .addQueryParameter(PARAM_LONGITUDE, String.valueOf(longitude))
+                .addQueryParameter(PARAM_LATITUDE, String.valueOf(coordinate.latitude))
+                .addQueryParameter(PARAM_LONGITUDE, String.valueOf(coordinate.longitude))
                 .addQueryParameter(PARAM_CNT,   SIZE_LIST)
                 .addQueryParameter(PARAM_APPID, APPID)
                 .addQueryParameter(PARAM_UNITS, UNIT)
                 .addQueryParameter(PARAM_LANG,  LANGUAGE_DESCRIPTION)
                 .build();
     }
+
 }

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class City implements Parcelable {
 
-    private int id;
+    private long id;
 
     private String name;
 
@@ -25,26 +26,21 @@ public class City implements Parcelable {
     @SerializedName("weather")
     @Expose
     private List<Weather> weather;
+    private int idBD;
 
+    private String created;
+
+    public City(){
+        weather = new ArrayList<>();
+    }
 
     protected City(Parcel in) {
-        id = in.readInt();
+        id = in.readLong();
         name = in.readString();
         temperature = in.readParcelable(Temperature.class.getClassLoader());
         weather = in.createTypedArrayList(Weather.CREATOR);
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(name);
-        dest.writeParcelable(temperature, flags);
-        dest.writeTypedList(weather);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
+        idBD = in.readInt();
+        created = in.readString();
     }
 
     public static final Creator<City> CREATOR = new Creator<City>() {
@@ -59,7 +55,7 @@ public class City implements Parcelable {
         }
     };
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -75,4 +71,48 @@ public class City implements Parcelable {
         return weather;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setIdBD(int idBD) {
+        this.idBD = idBD;
+    }
+
+    public int getIdBD() {
+        return idBD;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(name);
+        parcel.writeParcelable(temperature, i);
+        parcel.writeTypedList(weather);
+        parcel.writeInt(idBD);
+        parcel.writeString(created);
+    }
+
+    public void setTemperature(Temperature temperature) {
+        this.temperature = temperature;
+    }
+
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getCreated() {
+        return created;
+    }
 }

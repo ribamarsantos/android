@@ -19,6 +19,8 @@ public class Temperature implements Parcelable {
     @Expose
     private double tempMax;
 
+    public Temperature() {
+    }
 
     protected Temperature(Parcel in) {
         tempMin = in.readDouble();
@@ -54,5 +56,13 @@ public class Temperature implements Parcelable {
 
     public double getTempMax() {
         return tempMax;
+    }
+
+    public void setTempMin(double tempMin) {
+        this.tempMin = tempMin;
+    }
+
+    public void setTempMax(double tempMax) {
+        this.tempMax = tempMax;
     }
 }

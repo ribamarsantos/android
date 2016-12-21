@@ -4,4 +4,10 @@
     <string name="btn_search">Search</string>
     <string name="msg_withoutMarker">Select a place in the map</string>
     <string name="txt_empty">No City Founded</string>
+    <string name="mnu_favorite">Favorites</string>
+    <string name="text_undo">Undo</string>
+    <string name="msg_already_favorite">It is a favorite already</string>
+    <string name="msg_saved_successfully">Saved successfully</string>
+    <string name="share">Share</string>
+    <string name="share_text">Weather now: </string>
 </resources>

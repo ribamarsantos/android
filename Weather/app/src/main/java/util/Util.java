@@ -11,4 +11,7 @@ public  class Util {
     public static final int ID_LOADER = 0;
     public static final String EXTRA_CITY = "city";
     public static final String EXTRA_COORDINATE = "coordinate";
+
+
+    public static final String EXTRA_IS_FAVORITE_LIST = "favoriteList";
 }
